@@ -77,7 +77,7 @@ if [[ "$4" != "" ]]
 then
 	FILTER_USER=$4
 else
-	FILTER_USER="opefkwoefimwoqimfowiqemfowqimefoqwiemf"
+	FILTER_USER="djd9203di8j923idj923dj2i93jdij"
 fi
 
 IFS_OLD=$IFS
@@ -86,7 +86,12 @@ TEMP_FILE=$(date|sed -r 's/\s+/_/g') ## TODO - just use an array?
 for line in $(grep -i linkedin $FILE | sort -u | grep -iv "$FILTER_USER")
 do
 	fn=$(echo $line |awk '{print $2}');
-	ln=$(echo $line |awk '{print $3}')
+	ln=$(echo $line |awk '{print $3}');
+	pattern="^[A-Za-z]\.$"; ## Middle initial, not a last name.
+	if [[ "$ln" =~ $pattern ]]
+	then	
+		ln=$(echo $line |awk '{print $4}');
+	fi
 	fi=$(echo $fn |sed -r 's/^(.).*/\1/')
 	if [[ "$FORMAT" == 1 ]]
 	then
