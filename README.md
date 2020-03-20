@@ -1,18 +1,18 @@
 # gather_contacts_parser
 Parses output from [GatherContacts.jar](https://github.com/clr2of8/GatherContacts) [BurpSuite](https://portswigger.net/burp) plugin into a CSV Format
 ## ABOUT
-The GatherContacts.jar format is like so,
+The `GatherContacts.jar` BurpSuite plugin output format is like so,
 ```
 xxx?.linkedin.com first middle?.? last description
 ```
-`./gather_contacts_parser.sh` will format to the follow types:
+Which is not very friendly. They offer a winded tutorial on how to use Excel?, so `./gather_contacts_parser.sh` will format the output without Excel for you into the follow types:
 
 * {first initial}{last name}@domain.com
 * {last name}{first initial}@domain.com
 * {first name}.{last name}@domain.com
 * {last name}.{first name}@domain.com
 
-I made this out of frustration with Excel. I am a penetration tester that uses Linux to pentest, not Microsoft Office. BTW, If you know of other commmon naming schemes, feel free to let me know and I will add them.
+I made this out of frustration with Excel. I am a penetration tester. I use Linux to pentest, not Microsoft Office. BTW, If you know of other commmon naming schemes, feel free to let me know and I will add them.
 
 ## USAGE
 ```
