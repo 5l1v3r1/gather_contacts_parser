@@ -1,7 +1,7 @@
 # gather_contacts_parser
-Parses output from GatherContacts BurpSuite plugin into a CSV Format
+Parses output from [GatherContacts.jar](https://github.com/clr2of8/GatherContacts) [BurpSuite](https://portswigger.net/burp) plugin into a CSV Format
 ## ABOUT
-The [GatherContacts.jar](https://github.com/clr2of8/GatherContacts) format is like so,
+The GatherContacts.jar format is like so,
 ```
 xxx?.linkedin.com first middle?.? last description
 ```
