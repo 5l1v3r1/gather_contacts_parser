@@ -13,6 +13,8 @@ app_help () {
 	printf "   FORMATTER OPTION = \n"
 	printf "     1 = {first initial}{last name}@{domain}\n"
 	printf "     2 = {first name}{last initial}@{domain}\n"
+	printf "     3 = {first name}.{last name}@{domain}\n"
+	printf "     4 = {last name}.{first name}@{domain}\n"
 	printf "   FILTER_USER = user's last name to filter out.\n\n"
 	exit 1337;
 }
@@ -54,6 +56,12 @@ else
 	elif [[ "$3" == 2 ]]
 	then
 		FORMAT=2
+	elif [[ "$3" == 3 ]]
+	then
+		FORMAT=3
+	elif [[ "$3" == 4 ]]
+	then
+		FORMAT=4
 	else
 		printf "[E] Wrong format specifier provided.\n"
 		app_help;
@@ -93,12 +101,18 @@ do
 		ln=$(echo $line |awk '{print $4}');
 	fi
 	fi=$(echo $fn |sed -r 's/^(.).*/\1/')
-	if [[ "$FORMAT" == 1 ]]
+	if [ $FORMAT -eq 1 ]
 	then
-		email=$(echo -n ${fi}${ln}@${DOMAIN})
-	elif [[ "$FORMAT" == 2 ]]
+		email="${fi}${ln}@${DOMAIN}"
+	elif [ $FORMAT -eq 2 ]
 	then
-		email=$(echo -n ${ln}${fi}@${DOMAIN})
+		email="${ln}${fi}@${DOMAIN}"
+	elif [ $FORMAT -eq 3 ]
+	then
+		email="${fn}.${ln}@${DOMAIN}";
+	elif [ $FORMAT -eq 4 ]
+	then
+		email="${ln}.${fn}@${DOMAIN}";
 	fi
 	printf "${fn},${ln},$email\n" >> $DOMAIN_${TEMP_FILE}
 done
