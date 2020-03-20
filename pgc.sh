@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
+#
+# PGC -
+#
 # Parse the logged output of GatherContacts.jar into a nice CSV
 # 2020 Douglas Berdeaux
 # WeakNet Labs
 #
-
 ## HELP DIALOG:
 app_help () {
 	printf "\n HELP: \n";
@@ -28,7 +30,6 @@ then
 else
 	printf "[E] No file provided.\n";
 	app_help;
-	exit;
 fi
 
 ## DOMAIN option:
@@ -39,8 +40,6 @@ then
 else
 	printf "[E] No domain provided.\n"
 	app_help;
-	exit;
-
 fi
 
 ## FORMAT option:
@@ -48,7 +47,6 @@ if [[ "$3" == "" ]]
 then
 	printf "[E] Please provide a formatter option.\n"
 	app_help;
-	exit;
 else
 	if [[ "$3" == 1 ]]
 	then
@@ -65,7 +63,6 @@ else
 	else
 		printf "[E] Wrong format specifier provided.\n"
 		app_help;
-		exit;
 	fi
 fi
 
@@ -77,7 +74,6 @@ then
 else
 	printf "[E] Cannot open file $FILE.\n"
 	app_help;
-	exit;
 fi
 
 ## FILTER user option:
@@ -85,7 +81,7 @@ if [[ "$4" != "" ]]
 then
 	FILTER_USER=$4
 else
-	FILTER_USER="djd9203di8j923idj923dj2i93jdij"
+	FILTER_USER="djd9203di8j923idj923dj2i93jdij" # filter something out at least.
 fi
 
 IFS_OLD=$IFS
@@ -97,7 +93,7 @@ do
 	ln=$(echo $line |awk '{print $3}');
 	pattern="^[A-Za-z]\.$"; ## Middle initial, not a last name.
 	if [[ "$ln" =~ $pattern ]]
-	then	
+	then
 		ln=$(echo $line |awk '{print $4}');
 	fi
 	fi=$(echo $fn |sed -r 's/^(.).*/\1/')
@@ -116,6 +112,7 @@ do
 	fi
 	printf "${fn},${ln},$email\n" >> $DOMAIN_${TEMP_FILE}
 done
+printf "First, Last, Email\n" # The CSV header required.
 sort -u $TEMP_FILE | egrep -E -v '[^a-zA-Z0-9.,@_-]' && rm $TEMP_FILE
 IFS=$IFS_OLD # return this in tact.
 # printf "[i] Script completed successfully.\n" ## DEBUG
