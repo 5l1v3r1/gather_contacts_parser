@@ -17,7 +17,7 @@ I made this out of frustration with Excel. I am a penetration tester that uses L
 ## USAGE
 ```
  HELP: 
- ./parse_gather_contacts (FILE) (DOMAIN) (FORMATTER OPTION) ([OPTIONAL] FILTER OUT USER'S LAST NAME.)
+ ./parse_gather_contacts (FILE) (DOMAIN) (FORMATTER OPTION) ([OPTIONAL] FILTER_USER) ([OPTIONAL] -H)
    FILE = log file from GatherContacts.jar
    DOMAIN = Email domain to use for the output
    FORMATTER OPTION = 
@@ -26,4 +26,5 @@ I made this out of frustration with Excel. I am a penetration tester that uses L
      3 = {first name}.{last name}@{domain}
      4 = {last name}.{first name}@{domain}
    FILTER_USER = user's last name to filter out.
+   -H = Create CSV header ([first],[last],[email])
 ```
