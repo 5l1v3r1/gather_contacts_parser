@@ -15,6 +15,14 @@ Which is not very friendly. They offer a winded tutorial on how to use Excel?, s
 I made this out of frustration with Excel. I am a penetration tester. I use Linux to pentest, not Microsoft Office. BTW, If you know of other commmon naming schemes, feel free to let me know and I will add them.
 
 ## USAGE
+Download and make executable with the following commands,
+```
+git clone https://github.com/weaknetlabs/gather_contacts_parser.git
+cd gather_contacts_parser
+chmod +x gcp.sh
+./gcp.sh
+```
+The usage will print out like so,
 ```
  HELP: 
  ./parse_gather_contacts (FILE) (DOMAIN) (FORMATTER OPTION) ([OPTIONAL] FILTER_USER)
