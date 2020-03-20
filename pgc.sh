@@ -43,28 +43,30 @@ else
 fi
 
 ## FORMAT option:
-if [[ "$3" == "" ]]
-then
-	printf "[E] Please provide a formatter option.\n"
-	app_help;
-else
-	if [[ "$3" == 1 ]]
-	then
+
+
+case $3 in
+	"")
+		printf "[E] Please provide a formatter option.\n"
+		app_help;
+		;;
+	1)
 		FORMAT=1
-	elif [[ "$3" == 2 ]]
-	then
+		;;
+	2)
 		FORMAT=2
-	elif [[ "$3" == 3 ]]
-	then
+		;;
+	3)
 		FORMAT=3
-	elif [[ "$3" == 4 ]]
-	then
+		;;
+	4)
 		FORMAT=4
-	else
+		;;
+	*)
 		printf "[E] Wrong format specifier provided.\n"
 		app_help;
-	fi
-fi
+		;;
+esac
 
 ## Check file exists:
 if [[ -f "$FILE" ]]
@@ -84,8 +86,9 @@ else
 	FILTER_USER="djd9203di8j923idj923dj2i93jdij" # filter something out at least.
 fi
 
-IFS_OLD=$IFS
-IFS=$'\n'
+## OUTPUT to the terminal - leave it up to the user to put into a file with $(tee)
+IFS_OLD=$IFS ## Preserve the field separator
+IFS=$'\n' ## make the field separator a newline
 TEMP_FILE=$(date|sed -r 's/\s+/_/g') ## TODO - just use an array?
 for line in $(grep -i linkedin $FILE | sort -u | grep -iv "$FILTER_USER")
 do
